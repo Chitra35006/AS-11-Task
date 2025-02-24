@@ -72,7 +72,7 @@ This task management application enables users to efficiently organize their tas
 - sweetalert2: ^11.17.2  
 
 ## ::: Live Link :::
- https://a-12-perfect-pair.web.app
+ https://as-to-do-task.web.app/
 
  # 🛠 Setup Instructions
 

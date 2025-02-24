@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import lottieImg from "../assets/lottie.json";
 import { FaTasks } from "react-icons/fa";
+import useAuth from "../Hooks/useAuth";
 
 const Home = () => {
     const navigate = useNavigate();
+    const{user} = useAuth();
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-white">
@@ -47,15 +49,16 @@ const Home = () => {
 
                     {/* Animated "Set Tasks" Button */}
                     <motion.button
-                        className="mt-10 px-6 py-3 bg-orange-700 text-white rounded-lg shadow-lg text-lg font-semibold hover:bg-blue-600 transition-all flex items-center gap-2"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 1.5 }}
-                        whileHover={{ scale: 1.1 }}
-                        onClick={() => navigate("/tasks")}
-                    >
-                        <FaTasks /> Set Tasks
-                    </motion.button>
+  className="mt-10 px-6 py-3 bg-orange-700 text-white rounded-lg shadow-lg text-lg font-semibold hover:bg-blue-600 transition-all flex items-center gap-2"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 1, delay: 1.5 }}
+  whileHover={{ scale: 1.1 }}
+  onClick={() => navigate(user ? "/dashboard" : "/signIn")}
+>
+  <FaTasks /> Set Tasks
+</motion.button>
+
                 </div>
 
                 {/* Right Side - Lottie Animation */}

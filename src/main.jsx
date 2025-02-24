@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
 
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 
 import PrivateRoute from './Routes/PrivateRoute';
 
@@ -21,7 +21,7 @@ import TaskBoard from './Components/Tasks/TaskBoard';
 import TaskList from './Components/Tasks/TaskList';
 import TaskForm from './Components/Tasks/TaskForm';
 import { ThemeProvider } from './Provider/ThemeContext';
-const queryClient = new QueryClient();
+
 
 const router = createBrowserRouter([
   {
@@ -59,10 +59,10 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ThemeProvider>
     <AuthProvider>
-  <QueryClientProvider client={queryClient}>
+  
         <Toaster />
         <RouterProvider router={router} />
-      </QueryClientProvider>
+      
   </AuthProvider>
     </ThemeProvider>
 

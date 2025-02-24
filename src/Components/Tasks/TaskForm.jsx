@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useTheme from "../../Hooks/useTheme";
 
-const TaskForm = ({ onTaskAdded }) => {
+const TaskForm = () => {
   const { theme } = useTheme();
   const [task, setTask] = useState({
     title: "",
@@ -25,25 +25,27 @@ const TaskForm = ({ onTaskAdded }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!task.title.trim() || !task.description.trim()) {
       toast.error("Title and description cannot be empty.");
       return;
     }
 
     setIsSubmitting(true);
+
     try {
-      const response = await axios.post(
-        "https://task-manager-backend-nine-psi.vercel.app/tasks",
-        task
-      );
-      onTaskAdded(response.data);
+      const response = await axios.post("http://localhost:5000/tasks", task);
+      console.log("Response from server:", response.data);
+      
+      
+      // Show success toast
+      const toastId = toast.success("Task added successfully!", {
+        onClose: () => navigate("/dashboard/taskBoard"), // Navigate on toast close
+      });
+
+      // Clear the form fields
       setTask({ title: "", description: "", category: "To-Do" });
 
-      toast.success("Task added successfully!");
-
-      setTimeout(() => {
-        navigate("/dashboard/taskBoard");
-      }, 2000);
     } catch (error) {
       console.error("Error adding task:", error);
       toast.error("Failed to add task. Please try again.");
@@ -54,9 +56,7 @@ const TaskForm = ({ onTaskAdded }) => {
 
   return (
     <div className="mt-28 h-screen">
-      <h2 className="text-orange-500 text-3xl font-bold text-center">
-        Add Task
-      </h2>
+      <h2 className="text-orange-500 text-3xl font-bold text-center">Add Task</h2>
       <form
         onSubmit={handleSubmit}
         className={`max-w-md mx-auto p-6 shadow-md rounded-lg ${

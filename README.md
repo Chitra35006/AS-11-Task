@@ -42,6 +42,8 @@ This task management application enables users to efficiently organize their tas
 </div>
 
 <h3 align="left">::: Dependencies :::</h3>
+
+
 - @react-forked/dnd: ^15.0.0  
 - @tailwindcss/vite: ^4.0.8  
 - @tanstack/react-query: ^5.66.9  

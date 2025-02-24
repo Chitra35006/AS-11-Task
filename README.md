@@ -1,4 +1,7 @@
 # Project Name: Task Flow [A Drug Drop Platform]
+<div align="center">
+  <img height="500" width="100%" src="https://github.com/Chitra35006/5_practice/blob/88d511a9bdd6c458fa867e3234b962d7b4b74a64/a101.png" />
+</div>
 ## :::Description:::
 This task management application enables users to efficiently organize their tasks with drag-and-drop functionality. It features three categories: To-Do, In Progress, and Done. Users can add tasks to any category, drag tasks between categories, and also edit or delete them as needed.
 ## :::Project Features:::

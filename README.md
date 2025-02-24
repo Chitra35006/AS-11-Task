@@ -83,7 +83,7 @@ Follow these steps to clone the repository, install dependencies, and run the pr
 Start by cloning the repository to your local machine and navigating into the project directory:
 
 ```bash
-git clone https://github.com/Chitra35006/A-12-Perfect-Pair-Client.git
+git clone https://github.com/Chitra35006/AS-11-Task.git
 cd A-12-Perfect-Pair-Client
 
 Install the necessary dependencies using your preferred package manager (npm or yarn):

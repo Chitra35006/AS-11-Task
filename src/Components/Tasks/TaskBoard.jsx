@@ -12,7 +12,7 @@ const TaskBoard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/tasks")
+      .get("https://as-11-to-do-task-server.vercel.app/tasks")
       .then((response) => setTasks(response.data))
       .catch((error) => console.error("Error fetching tasks:", error));
   }, []);
@@ -40,7 +40,7 @@ const TaskBoard = () => {
   
     // 4️⃣ Update the backend
     try {
-      await axios.put(`http://localhost:5000/tasks/${draggableId}`, {
+      await axios.put(`https://as-11-to-do-task-server.vercel.app/tasks/${draggableId}`, {
         category: destination.droppableId,
       });
     } catch (error) {
@@ -60,7 +60,7 @@ const TaskBoard = () => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:5000/tasks/${id}`);
+        await axios.delete(`https://as-11-to-do-task-server.vercel.app/tasks/${id}`);
         setTasks(tasks.filter((task) => task._id !== id));
         Swal.fire("Deleted!", "Your task has been deleted.", "success");
       }
@@ -74,7 +74,7 @@ const TaskBoard = () => {
   const handleUpdateTask = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/tasks/${editTask._id}`, editTask);
+      await axios.put(`https://as-11-to-do-task-server.vercel.app/tasks/${editTask._id}`, editTask);
       setTasks(tasks.map((task) => (task._id === editTask._id ? { ...editTask } : task)));
       setEditTask(null);
     } catch (error) {

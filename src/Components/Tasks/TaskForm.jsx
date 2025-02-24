@@ -34,7 +34,7 @@ const TaskForm = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post("http://localhost:5000/tasks", task);
+      const response = await axios.post("https://as-11-to-do-task-server.vercel.app/tasks", task);
       console.log("Response from server:", response.data);
       
       

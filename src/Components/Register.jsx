@@ -58,7 +58,7 @@ const onSubmit = async (data) => {
                         role: "User",
                     };
 
-                    axios.post("http://localhost:5000/users", userInfo)
+                    axios.post("https://as-11-to-do-task-server.vercel.app/users", userInfo)
                         .then((res) => {
                             if (res.data.insertedId) {
                                 toast.success("Registration Successful!");

@@ -35,7 +35,7 @@ const SignIn = () => {
 
         // Store the user in the database
         axios
-          .post("http://localhost:5000/users", userInfo)
+          .post("https://as-11-to-do-task-server.vercel.app/users", userInfo)
           .then((res) => {
             if (res.data.insertedId) {
               // console.log("User stored in database:", res.data);

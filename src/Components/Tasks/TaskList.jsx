@@ -8,7 +8,7 @@ const TaskList = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/tasks")
+      .get("https://as-11-to-do-task-server.vercel.app/tasks")
       .then((response) => setTasks(response.data))
       .catch((error) => console.error("Error fetching tasks:", error));
   }, []);

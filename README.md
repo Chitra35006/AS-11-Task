@@ -86,7 +86,7 @@ Start by cloning the repository to your local machine and navigating into the pr
 
 ```bash
 git clone https://github.com/Chitra35006/AS-11-Task.git
-cd A-12-Perfect-Pair-Client
+cd AS-11-Task
 
 Install the necessary dependencies using your preferred package manager (npm or yarn):
 

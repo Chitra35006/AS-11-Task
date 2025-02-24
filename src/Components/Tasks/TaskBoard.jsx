@@ -4,7 +4,9 @@ import axios from "axios";
 import { DragDropContext, Droppable, Draggable } from "@react-forked/dnd";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import useTheme from '../../Hooks/useTheme';
 const TaskBoard = () => {
+    const {theme} = useTheme();
     const [tasks, setTasks] = useState([]);
   const [editTask, setEditTask] = useState(null);
 
@@ -16,35 +18,38 @@ const TaskBoard = () => {
   }, []);
 
   const onDragEnd = async (result) => {
-    const { source, destination } = result;
-  
-    // If dropped outside a droppable area, do nothing
+    const { source, destination, draggableId } = result;
     if (!destination) return;
   
-    // If the task is dropped in the same position, do nothing
-    if (source.droppableId === destination.droppableId && source.index === destination.index) {
-      return;
+    setTasks((prevTasks) => {
+      // 1️⃣ Copy the tasks to avoid direct mutation
+      const updatedTasks = [...prevTasks];
+  
+      // 2️⃣ Find the moved task using its ID
+      const movedTaskIndex = updatedTasks.findIndex(task => task._id === draggableId);
+      if (movedTaskIndex === -1) return prevTasks; // Exit if task not found
+  
+      const [movedTask] = updatedTasks.splice(movedTaskIndex, 1); // Remove task
+      movedTask.category = destination.droppableId; // Update category
+  
+      // 3️⃣ Insert the task at the correct index in the new category
+      updatedTasks.splice(destination.index, 0, movedTask);
+  
+      return [...updatedTasks]; // Force state update
+    });
+  
+    // 4️⃣ Update the backend
+    try {
+      await axios.put(`http://localhost:5000/tasks/${draggableId}`, {
+        category: destination.droppableId,
+      });
+    } catch (error) {
+      console.error("Failed to update task category:", error);
     }
-  
-    const updatedTasks = [...tasks];
-    const [movedTask] = updatedTasks.splice(source.index, 1);
-  
-    // Check if the category is actually changing
-    if (movedTask.category !== destination.droppableId) {
-      movedTask.category = destination.droppableId;
-  
-      try {
-        await axios.put(`http://localhost:5000/tasks/${movedTask._id}`, {
-          category: movedTask.category,
-        });
-      } catch (error) {
-        console.error("Failed to update task category:", error);
-      }
-    }
-  
-    updatedTasks.splice(destination.index, 0, movedTask);
-    setTasks(updatedTasks);
   };
+  
+  
+  
   
   const deleteTask = async (id) => {
     Swal.fire({
@@ -78,26 +83,26 @@ const TaskBoard = () => {
   };
 
     return (
-        <div className="p-5 h-screen">
-      <h1 className="text-3xl font-bold text-orange-600 text-center mb-5">Task Management</h1>
+        <div className={`p-5 h-screen ${theme==="dark"?"bg-slate-900":"bg-orange-50"}`}>
+      <h1 className={`text-3xl font-bold ${theme === "dark"?"text-red-500":"text-orange-600"} text-center mb-5`}>Task Management</h1>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {["To-Do", "In Progress", "Done"].map((category) => (
             <Droppable key={category} droppableId={category} type="TASK">
               {(provided) => (
-                <div ref={provided.innerRef} {...provided.droppableProps} className="bg-white shadow-lg p-5 w-80 rounded-lg min-h-[200px]">
-                  <h2 className="text-xl font-semibold mb-3 text-center">{category}</h2>
+                <div ref={provided.innerRef} {...provided.droppableProps} className={`shadow-lg p-5 w-80 rounded-lg min-h-[200px] ${theme ==="dark"?"bg-black":"bg-white "}`}>
+                  <h2 className={`text-xl font-semibold mb-3 text-center ${theme === "dark"?"text-red-500":""}`}>{category}</h2>
                   {tasks.filter((task) => task.category === category).map((task, index) => (
                     <Draggable key={task._id} draggableId={task._id} index={index}>
                       {(provided) => (
-                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className="bg-gray-200 p-3 mb-2 rounded-md flex justify-between items-center">
+                        <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} className={`${theme ==="dark"?"bg-gradient-to-r from-slate-900 to-red-500":"bg-gray-100"} border border-gray-300 rounded-bl-[40px] p-4 mb-2 rounded-md flex justify-between items-center`}>
                           <div>
-                            <h3 className="font-bold">{task.title}</h3>
-                            <p>{task.description}</p>
+                            <h3 className={`font-bold ${theme === "dark"?"text-slate-200":""}`}>{task.title}</h3>
+                            <p className={`${theme === "dark"?"text-slate-300":""}`}>{task.description}</p>
                           </div>
                           <div className="flex gap-2">
-                            <button onClick={() => handleEditClick(task)} className="text-blue-500"><FaEdit /></button>
-                            <button onClick={() => deleteTask(task._id)} className="text-red-500"><FaTrash /></button>
+                            <button onClick={() => handleEditClick(task)} className="text-slate-900"><FaEdit /></button>
+                            <button onClick={() => deleteTask(task._id)} className={`${theme ==="dark"?"text-red-800":"text-red-500"}`}><FaTrash /></button>
                           </div>
                         </div>
                       )}

@@ -6,12 +6,15 @@ import { signInWithPopup, getAuth, GoogleAuthProvider } from "firebase/auth";
 import toast from "react-hot-toast";
 import axios from "axios";
 import useAuth from "../Hooks/useAuth";
+import useTheme from "../Hooks/useTheme";
 const SignIn = () => {
     const { setUser, userSignIn } = useAuth();
   const auth = getAuth();
   const googleProvider = new GoogleAuthProvider();
   const location = useLocation();
   const navigate = useNavigate();
+  const {theme} = useTheme();
+
 
   const {
     register,
@@ -45,7 +48,7 @@ const SignIn = () => {
         // Regardless of database response, update state, show toast, and navigate
         setUser(user); // Set the user context
         toast.success("Login Successful!");
-        navigate(location?.state ? location.state : "/dashboard");
+        navigate(location?.state ? location.state : "/dashboard/taskForm");
       })
       .catch((err) => {
         console.error("Google Sign-In Error:", err);
@@ -62,15 +65,15 @@ const SignIn = () => {
         const user = result.user;
         setUser(user);
         toast.success("Login Successful!");
-        navigate(location?.state ? location.state : "/dashboard");
+        navigate(location?.state ? location.state : "/dashboard/taskForm");
       })
       .catch(() => {
         toast.error("Login failed. Please check your email and password.");
       });
   };
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-orange-100 to-yellow-50">
-        <div className="md:w-2/5 w-4/5 mx-auto bg-white shadow-lg rounded-lg p-8">
+        <div className={`flex justify-center items-center min-h-screen  ${theme === "dark"?"bg-black":"bg-gradient-to-r from-orange-100 to-yellow-50"}`}>
+        <div className={`md:w-2/5 w-4/5 mx-auto  shadow-lg rounded-lg p-8 ${theme ==="dark"?"bg-slate-950":"bg-white"}`}>
           {/* Heading */}
           <h1 className="text-center font-semibold text-2xl text-orange-600 mb-6">
             Login to Your Account

@@ -4,13 +4,15 @@ import Lottie from "lottie-react";
 import lottieImg from "../assets/lottie.json";
 import { FaTasks } from "react-icons/fa";
 import useAuth from "../Hooks/useAuth";
-
+import useTheme from "../Hooks/useTheme";
+import { FaSun, FaMoon } from "react-icons/fa";
 const Home = () => {
     const navigate = useNavigate();
     const{user} = useAuth();
+    const{theme,toggleTheme} = useTheme();
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className={`min-h-screen flex items-center justify-center ${theme==="dark"?"bg-black":"bg-white"}`}>
             <div className="w-4/5 mx-auto flex flex-col md:flex-row items-center py-10">
                 {/* Left Side - Text and Button */}
                 <div className="flex flex-col items-start md:w-1/2">
@@ -32,7 +34,7 @@ const Home = () => {
                             transition: { duration: 0.3 },
                         }}
                     >
-                        Welcome to Task Tracker
+                        Welcome to Task Flow
                     </motion.h1>
 
                     {/* Animated Description */}
@@ -48,16 +50,27 @@ const Home = () => {
                     </motion.p>
 
                     {/* Animated "Set Tasks" Button */}
-                    <motion.button
-  className="mt-10 px-6 py-3 bg-orange-700 text-white rounded-lg shadow-lg text-lg font-semibold hover:bg-blue-600 transition-all flex items-center gap-2"
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 1, delay: 1.5 }}
-  whileHover={{ scale: 1.1 }}
-  onClick={() => navigate(user ? "/dashboard" : "/signIn")}
->
-  <FaTasks /> Set Tasks
-</motion.button>
+                    <div className="flex items-center gap-4 mt-10">
+  <motion.button
+    className="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-lg shadow-lg text-lg font-semibold hover:bg-slate-900 transition-all flex items-center gap-2"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1, delay: 1.5 }}
+    whileHover={{ scale: 1.1 }}
+    onClick={() => navigate(user ? "/dashboard/taskForm" : "/signIn")}
+  >
+    <FaTasks /> Set Tasks
+  </motion.button>
+
+  <button onClick={toggleTheme} className="btn btn-ghost rounded-full">
+    {theme === "dark" ? (
+      <FaSun className="text-gray-200" />
+    ) : (
+      <FaMoon className="text-black" />
+    )}
+  </button>
+</div>
+
 
                 </div>
 

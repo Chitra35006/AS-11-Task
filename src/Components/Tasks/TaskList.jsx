@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import useTheme from '../../Hooks/useTheme';
 
 const TaskList = () => {
     const [tasks, setTasks] = useState([]);
+    const {theme} = useTheme();
 
   useEffect(() => {
     axios
@@ -11,22 +13,22 @@ const TaskList = () => {
       .catch((error) => console.error("Error fetching tasks:", error));
   }, []);
     return (
-        <div className="p-6 h-screen">
-        <h2 className="text-3xl font-bold mb-4 text-[#3388C5]">Task List</h2>
+        <div className="p-6 ml-60 mr-20 h-screen">
+        <h2 className={`text-3xl font-bold mb-4 ${theme === "dark"?"text-red-700":"text-orange-600"}`}>Task List</h2>
         {tasks.length === 0 ? (
           <p className="text-gray-600">No tasks available</p>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-sm">
+            <table className={`min-w-full ${theme==="dark"?"bg-black":"bg-white"} border border-gray-200 rounded-lg shadow-sm`}>
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className={`px-6 py-3 text-left text-xs font-medium ${theme==="dark"?"text-red-500":"text-gray-500"} uppercase tracking-wider`}>
                     Title
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className={`px-6 py-3 text-left text-xs font-medium ${theme==="dark"?"text-red-500":"text-gray-500"} uppercase tracking-wider`}>
                     Description
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className={`px-6 py-3 text-left text-xs font-medium ${theme==="dark"?"text-red-500":"text-gray-500"} uppercase tracking-wider`}>
                     Status
                   </th>
                 </tr>

@@ -20,6 +20,7 @@ import MainLayout from './Layout/MainLayout';
 import TaskBoard from './Components/Tasks/TaskBoard';
 import TaskList from './Components/Tasks/TaskList';
 import TaskForm from './Components/Tasks/TaskForm';
+import { ThemeProvider } from './Provider/ThemeContext';
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
         element:<TaskList></TaskList>
       },
       {
-        path:"taskFrom",
+        path:"taskForm",
         element:<TaskForm></TaskForm>
       }
     ]
@@ -56,12 +57,14 @@ const router = createBrowserRouter([
 ])
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <ThemeProvider>
     <AuthProvider>
   <QueryClientProvider client={queryClient}>
         <Toaster />
         <RouterProvider router={router} />
       </QueryClientProvider>
   </AuthProvider>
+    </ThemeProvider>
 
   </StrictMode>,
 )

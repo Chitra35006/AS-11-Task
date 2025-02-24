@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 import useAuth from '../Hooks/useAuth';
+import useTheme from "../Hooks/useTheme";
 // const img_hosting_key = import.meta.env.VITE_IMAGE_HOST_KEY;
 // const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
 
@@ -11,6 +12,7 @@ const Register = () => {
     const { createNewUser, setUser, updateUserProfile } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const{theme} = useTheme();
 
   const {
     register,
@@ -63,7 +65,7 @@ const onSubmit = async (data) => {
                             }
                         });
 
-                    navigate(location?.state?.from || "/dashboard");
+                    navigate(location?.state?.from || "/dashboard/taskForm");
                 })
                 .catch((err) => console.error(err));
         })
@@ -73,8 +75,8 @@ const onSubmit = async (data) => {
 
   };
     return (
-        <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-orange-100 to-yellow-50">
-      <div className="md:w-2/5 w-4/5 mx-auto bg-white shadow-lg rounded-lg p-8">
+        <div className={`flex justify-center items-center min-h-screen ${theme === "dark"?"bg-black":"bg-gradient-to-r from-orange-100 to-yellow-50"}`}>
+      <div className={`md:w-2/5 w-4/5 mx-auto shadow-lg rounded-lg p-8 ${theme ==="dark"?"bg-slate-950":"bg-white"}`}>
         {/* Heading */}
         <h1 className="text-center font-semibold text-2xl text-orange-600 mb-6">
           Register Your Account

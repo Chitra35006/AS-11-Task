@@ -6,3 +6,26 @@
 .font-sora{
   font-family: "Sora", serif;
 }
+html, body {
+  overflow-x: hidden;
+}
+.active-link {
+  background: linear-gradient(to right, #0f172a, #ef4444); /* Slate-900 to Red-500 */
+  color: white; /* Active text color */
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 8px 12px; /* Ensure padding for better visibility */
+  transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+body {
+  background-color: white;
+ 
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Mode styles */
+html.dark body {
+  background-color: #030711; /* Dark background */
+  /* Light text */
+}
+

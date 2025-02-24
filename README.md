@@ -1,6 +1,6 @@
 # Project Name: Task Flow [A Drug Drop Platform]
 <div align="center">
-  <img height="500" width="100%" src="https://github.com/Chitra35006/5_practice/blob/88d511a9bdd6c458fa867e3234b962d7b4b74a64/a101.png" />
+  <img height="400" width="100%" src="https://github.com/Chitra35006/5_practice/blob/88d511a9bdd6c458fa867e3234b962d7b4b74a64/a101.png" />
 </div>
 
 ## :::Description:::

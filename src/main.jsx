@@ -21,6 +21,7 @@ import TaskBoard from './Components/Tasks/TaskBoard';
 import TaskList from './Components/Tasks/TaskList';
 import TaskForm from './Components/Tasks/TaskForm';
 import { ThemeProvider } from './Provider/ThemeContext';
+import Four04Page from './Components/Four04Page';
 
 
 const router = createBrowserRouter([
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
         element:<TaskForm></TaskForm>
       }
     ]
+  },
+  {
+    path:"*",
+    element:<Four04Page></Four04Page>
   }
 ])
 createRoot(document.getElementById('root')).render(

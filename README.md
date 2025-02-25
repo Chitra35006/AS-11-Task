@@ -1,6 +1,6 @@
 # Project Name: Task Flow [A Drug Drop Platform]
 <div align="center">
-  <img height="500" width="100%" src="https://github.com/Chitra35006/5_practice/blob/88d511a9bdd6c458fa867e3234b962d7b4b74a64/a101.png" />
+  <img height="400" width="100%" src="https://github.com/Chitra35006/5_practice/blob/88d511a9bdd6c458fa867e3234b962d7b4b74a64/a101.png" />
 </div>
 
 ## :::Description:::
@@ -86,7 +86,7 @@ Start by cloning the repository to your local machine and navigating into the pr
 
 ```bash
 git clone https://github.com/Chitra35006/AS-11-Task.git
-cd A-12-Perfect-Pair-Client
+cd AS-11-Task
 
 Install the necessary dependencies using your preferred package manager (npm or yarn):
 
